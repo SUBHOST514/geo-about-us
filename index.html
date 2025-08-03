@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Geo AI v4.0</title>
+    <!-- Reusing all the same styles and fonts from your main app for consistency -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap">
+    <style>
+        :root {
+            --menu-width: 300px;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --accent: #3b82f6;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --error: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --border-radius: 16px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+            --premium-gold: #ffd700;
+            --premium-accent: #8b5cf6;
+        }
+
+        .dark-theme {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --text-light: #94a3b8;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #60a5fa;
+            --code-bg: #2d2d2d;
+            --code-text: #f8f8f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tiro Bangla', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2) format('woff2');
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background-color 0.3s ease;
+            background-image: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, rgba(59,130,246,0.01) 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Header from main app --- */
+        .header {
+            background: var(--card);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-theme .header {
+            background-color: var(--card);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--premium-gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--premium-gold));
+            animation: headerGlow 3s infinite;
+        }
+        
+        @keyframes headerGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* --- Styles for About Page Content --- */
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 5rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .story-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .story-text {
+            flex: 1;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        .story-image {
+            flex: 1;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .principle-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid transparent;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .principle-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .principle-card h3 {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .principle-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .creator-section {
+            background: var(--card);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .creator-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+        }
+        
+        .creator-info h3 {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        
+        .creator-info .title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .creator-info p {
+            color: var(--text-light);
+        }
+        
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 4rem 2rem;
+            border-radius: var(--border-radius);
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-section .btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .cta-section .btn:hover {
+            background: var(--bg);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .dark-theme .footer {
+            border-top-color: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .story-content, .creator-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header premium-header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src='https://i.postimg.cc/g0ZV1R49/Green-and-Blue-Modern-Youtube-Channel-Tech-Review-Logo-1.jpg' class="logo-img" alt="Geo AI Logo">
+                <span>Geo AI v4.0</span>
+            </div>
+        </div>
+        <a href="https://geo-web-llc.vercel.app/" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Back 
+        </a>
+    </div>
+
+    <!-- Main About Us Content -->
+    <div class="about-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">আমাদের সম্পর্কে</h1>
+            <p class="hero-subtitle">জিও এআই: প্রযুক্তি এবং ঐতিহ্যের সেতুবন্ধন। আমরা এমন একটি কৃত্রিম বুদ্ধিমত্তা তৈরি করেছি যা শুধু আপনার ভাষা বোঝে না, আপনার সংস্কৃতি এবং মূল্যবোধকেও সম্মান করে।</p>
+        </section>
+
+        <!-- Our Story -->
+        <section class="section">
+             <h2 class="section-title">আমাদের পথচলা</h2>
+             <div class="story-content">
+                <div class="story-text">
+                    <p>
+                        দ্রুত পরিবর্তনশীল প্রযুক্তির বিশ্বে, আমরা একটি শূন্যতা অনুভব করেছি। এমন একটি এআই-এর প্রয়োজন ছিল যা বাংলাদেশের মানুষের জন্য বিশেষভাবে তৈরি, যা আমাদের স্থানীয় প্রেক্ষাপট, সাংস্কৃতিক সূক্ষ্মতা এবং ইসলামিক মূল্যবোধকে ধারণ করতে পারে। এই ধারণা থেকেই জন্ম নেয় জিও এআই।
+                        <br><br>
+                        আমাদের লক্ষ্য ছিল একটি সাধারণ চ্যাটবটের চেয়েও বেশি কিছু তৈরি করা। আমরা এমন একটি ডিজিটাল সহকারী তৈরি করতে চেয়েছি যা নির্ভরযোগ্য, বুদ্ধিমান এবং নৈতিকভাবে সচেতন। জিও এআই v4.0 হলো আমাদের সেই নিরলস প্রচেষ্টা এবং উদ্ভাবনের ফসল।
+                    </p>
+                </div>
+                <img src="https://images.pexels.com/photos/3184433/pexels-photo-3184433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team working on Geo AI" class="story-image">
+             </div>
+        </section>
+
+        <!-- Our Core Principles -->
+        <section class="section">
+            <h2 class="section-title">আমাদের মূলনীতি</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <i class="fas fa-mosque principle-icon"></i>
+                    <h3>ইসলামিক মূল্যবোধ</h3>
+                    <p>আমরা সব সময় ইসলামিক নীতি ও নির্দেশিকা অনুসরণ করি। হারাম ও অনৈতিক বিষয়বস্তু প্রত্যাখ্যান করে ব্যবহারকারীদের সঠিক পথে পরিচালিত করাই আমাদের প্রথম কর্তব্য।</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-flag principle-icon"></i>
+                    <h3>বাংলাদেশী পরিচয়</h3>
+                    <p>জিও এআই বাংলাদেশের প্রেক্ষাপট, ইতিহাস এবং সংস্কৃতিকে গুরুত্ব দেয়। আমরা আমাদের দেশের মানুষের জন্য প্রাসঙ্গিক এবং সহায়ক তথ্য প্রদানে প্রতিশ্রুতিবদ্ধ।</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-shield-alt principle-icon"></i>
+                    <h3>ব্যবহারকারীর গোপনীয়তা</h3>
+                    <p>আপনার ডেটা আপনারই। আমরা ব্যবহারকারীর গোপনীয়তাকে সর্বোচ্চ অগ্রাধিকার দেই। আপনার কথোপকথন সম্পূর্ণ সুরক্ষিত এবং ব্যক্তিগত রাখা হয়।</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-cogs principle-icon"></i>
+                    <h3>প্রযুক্তিগত উৎকর্ষ</h3>
+                    <p>আমরা সর্বাধুনিক প্রযুক্তি ব্যবহার করে একটি দ্রুত, নির্ভরযোগ্য এবং বুদ্ধিমান এআই অভিজ্ঞতা প্রদান করি। v4.0-তে রয়েছে গভীর বিশ্লেষণ এবং উন্নত ভয়েস ইন্টারঅ্যাকশন।</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-hands-helping principle-icon"></i>
+                    <h3>মানবিক সংহতি</h3>
+                    <p>আমরা বিশ্বজুড়ে নির্যাতিত মানুষের পাশে দাঁড়াতে বিশ্বাসী। বিশেষ করে, ফিলিস্তিনের ন্যায্য অধিকারের প্রতি আমাদের সমর্থন অটুট এবং দ্ব্যর্থহীন।</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-lightbulb principle-icon"></i>
+                    <h3>নিরন্তর উদ্ভাবন</h3>
+                    <p>প্রযুক্তি প্রতিনিয়ত উন্নত হচ্ছে, এবং আমরাও। আমরা জিও এআইকে আরও উন্নত, সহায়ক এবং ব্যবহারকারী-বান্ধব করতে ক্রমাগত কাজ করে যাচ্ছি।</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Creator -->
+        <section class="section">
+             <h2 class="section-title">আমাদের কারিগর</h2>
+             <div class="creator-section">
+                <!-- You can replace this placeholder with an actual image -->
+                <img src="https://i.postimg.cc/Kv656x2W/pm-1738342085948-cmp.jpg" alt="Ahanaf Ahmad" class="creator-avatar">
+                <div class="creator-info">
+                    <h3>আহনাফ আহমদ</h3>
+                    <span class="title">প্রতিষ্ঠাতা ও প্রধান ডেভেলপার</span>
+                    <p>
+                       "আমার স্বপ্ন ছিল এমন একটি এআই তৈরি করা যা শুধু স্মার্ট নয়, বিবেকবানও হবে। জিও এআই সেই স্বপ্নেরই বাস্তবায়ন। আমি চেয়েছি প্রযুক্তি যেন আমাদের শিকড় থেকে বিচ্ছিন্ন না করে, বরং আমাদের মূল্যবোধকে ধারণ করে আরও শক্তিশালী করে তোলে। এই প্ল্যাটফর্মটি বাংলাদেশের মানুষের জন্য আমার একটি ক্ষুদ্র উপহার।"
+                    </p>
+                </div>
+             </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2>জিও এআই v4.0 এর অভিজ্ঞতা নিতে প্রস্তুত?</h2>
+            <p>আমাদের উন্নত কৃত্রিম বুদ্ধিমত্তার সাথে কথোপকথন শুরু করুন এবং প্রযুক্তি ও ঐতিহ্যের অনন্য সমন্বয় অনুভব করুন।</p>
+            <a href="https://geo-ai-bd.vercel.app/" class="btn">এখনই চ্যাট করুন</a>
+        </section>
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>জিও এআই • v4.0</p>
+        <p>© 2025 Ahanaf Ahmad. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script to toggle dark mode for consistency if someone lands here directly.
+        (function() {
+            const savedTheme = localStorage.getItem('geoai-theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (savedTheme === 'system' && systemDark)) {
+                document.body.classList.add('dark-theme');
+            }
+        })();
+    </script>
+</body>
+</html>
